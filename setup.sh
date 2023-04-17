@@ -11,3 +11,7 @@ pip install --upgrade pip
 pip install --upgrade nbformat
 python3 -m pip install -r requirements.txt
 
+python3 src/emotions.py --filepath ./data/fake_or_real_news.csv --column title
+
+
+# Find out why the plots are with color.
