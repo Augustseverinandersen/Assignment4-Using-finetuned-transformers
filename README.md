@@ -33,13 +33,20 @@ You should write code and documentation which addresses the following tasks:
 
 # Discussion
 
-## Visualization One
+## All Emotions Bar
+- This bar plot gives an overview of the general distripution of emotions for all headings. A vast majority of the headings are classified as neutral, followed by fear, anger, sadness, disgust, surprise, and than joy. 
+## Real Emotions Bar
+-  This bar plot shows the distripution of emotions for real news articles. Again, the vast majority are categorised as neutral, followed by the same ranking of emotions as the previous plot. 
+## Fake Emotions Bar
+- This bar plot shows the distripution of emotions for all the fake news articles. The majority are categorised as neutral, but here disgust is slightly bigger than, sadness. 
+## All, Real, Fake Emotions Scatterplot
+- This scatterplot shows all three categorises (all, real, fake) in one plot. This plot clearly displays how common the emotion label, is for each category. It also shows how real and fake headlines, nearly are identical for each emotion.
 
-## Visualization Two
+## Discussion 
+- By using the plots I can clearly state the the majority of emotions are classified as netural. This could lead to the assumption that the headlines are mostly factual, and the author not using emotion to try to sway the reader in a certain direction. Another clearly statement, which can be made, is that mostly negative emotions are used in news headlines, such as fear and anger. This portays nicely to the "real world", where most news articles are of murders or problems in society. 
 
-## Visualization Three
-
-## Visualization Four
+### Future analysis 
+- It could be interesting to use POS, to see which kinds of words are used in the headline that give an emotion. By doing so, you could also see which emotion charged word is used the most.
 
 # Usage
 
@@ -47,12 +54,5 @@ To use the script I have created follow these steps, after cloning the repositor
 
 1. Get the data from Kaggle: https://www.kaggle.com/datasets/jillanisofttech/fake-or-real-news and store it in the data folder.
 2. Run bash setup.sh in the command line, which will create a virutal environment, and install the nessecary requirements. 
-3. OBS! Write the filepath to where you have stored the data, if you haven't stored it in the data folder: In the commandline run python3 src/emotions.py --filepath ./data/fake_or_real.csv
+3. OBS! Write the filepath to where you have stored the data, if you haven't stored it in the data folder: In the commandline run python3 src/emotions.py --filepath ./data/fake_or_real_news.csv
 4. After the code has run, the vizualizations will be stored in the folder figs.
-
-
-
-## Tips
-- I recommend using ```j-hartmann/emotion-english-distilroberta-base``` like we used in class.
-- Spend some time thinking about how best to present you results, and how to make your visualisations appealing and readable.
-- **MAKE SURE TO UPDATE YOUR README APPROPRIATELY!**

@@ -15,7 +15,6 @@ def input_parse():
     # initialize the parser
     parser = argparse.ArgumentParser()
     parser.add_argument("--filepath", type=str) # argument is filepath as a string
-    parser.add_argument("--column", type = str) # argument is for column either title or text
     args = parser.parse_args()
 
     return args
@@ -43,11 +42,11 @@ def filtering(data):
     return data_filtered_real, data_filtered_fake
 
 
-def data_cleaning(data, data_filtered_real, data_filtered_fake, args):
+def data_cleaning(data, data_filtered_real, data_filtered_fake):
     print("Selecting column")
-    all_texts = data[args.column] # Only selecting column "title" and storing in headlines
-    real_texts = data_filtered_real[args.column]
-    fake_texts = data_filtered_fake[args.column]
+    all_texts = data["title"] # Only selecting column "title" and storing in headlines
+    real_texts = data_filtered_real["title"]
+    fake_texts = data_filtered_fake["title"]
     
     return all_texts, real_texts, fake_texts
 
@@ -91,18 +90,19 @@ def splitting_dictionary(emotion_count, real_emotion_count, fake_emotion_count):
     fake_count = list(fake_emotion_count.values())
 
     return all_emotions, all_count, real_emotions, real_count, fake_emotions, fake_count
+
     
 def visualization_bar(emotions, count, title, folder = "figs"):
     print("Visualizing bar plots")
     plt.bar(range(len(emotions)), count, tick_label=emotions)
     plt.xlabel("Emotions")
     plt.ylabel("Count")
-    plt.legend()
     plt.title(title)
     plt.show()
 
     filename = os.path.join(folder, title.replace(' ', '_') + '.png')
     plt.savefig(filename)
+    plt.clf()
 
 def visualization_scatter(all_emotions, all_count, real_emotions, real_count, fake_emotions, fake_count, folder = "figs"):
     print("Visualizing scatterplot")
@@ -124,13 +124,14 @@ def visualization_scatter(all_emotions, all_count, real_emotions, real_count, fa
 
     filename = os.path.join(folder, "scatterplot" + '.png')
     plt.savefig(filename)
+    plt.clf()
 
 def main_function():
     args = input_parse()
     data = loading_data(args)
     classifier = pre_trained_model()
     data_filtered_real, data_filtered_fake = filtering(data)
-    all_texts, real_texts, fake_texts = data_cleaning(data, data_filtered_real, data_filtered_fake, args)
+    all_texts, real_texts, fake_texts = data_cleaning(data, data_filtered_real, data_filtered_fake)
     emotion_list, real_list, fake_list = emotion_loops(classifier, all_texts, real_texts, fake_texts)
     emotion_count, real_emotion_count, fake_emotion_count = emotion_occurance(emotion_list, real_list, fake_list)
     all_emotions, all_count, real_emotions, real_count, fake_emotions, fake_count = splitting_dictionary(emotion_count, real_emotion_count, fake_emotion_count)
