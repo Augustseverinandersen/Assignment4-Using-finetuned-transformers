@@ -54,5 +54,6 @@ To use the script I have created follow these steps, after cloning the repositor
 
 1. Get the data from Kaggle: https://www.kaggle.com/datasets/jillanisofttech/fake-or-real-news and store it in a folder you have created, f.x. data
 2. Run bash setup.sh in the command line, which will create a virutal environment, and install the nessecary requirements. 
-3. OBS! Write the filepath to where you have stored the data, if you haven't stored it in the data folder: In the commandline run python3 src/emotions.py --filepath ./data/fake_or_real_news.csv
-4. After the code has run, the vizualizations will be stored in the folder figs.
+3. Run source ./assignment_4/bin/activate  in the command line to activate the virutal environment
+4. OBS! Write the filepath to where you have stored the data, if you haven't stored it in the data folder: In the commandline run python3 src/emotions.py --filepath ./data/fake_or_real_news.csv
+5. After the code has run, the vizualizations will be stored in the folder figs.
