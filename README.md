@@ -31,7 +31,7 @@ You should write code and documentation which addresses the following tasks:
 
 ## Methods / what the code does 
 
-- The code loads the data in from a user specified path. Gets the model from huggingface by using pipeline, and specifying which model to get. The data is filtered and cleaned to generate a list of all headings, all real headings, and all fake headings. Thereafter, three loops are used to take each heading in the list, and use the emotion classifer to get the label (emotion) with the highest score, and store it in an empty list. Than using python code, each emotion occorance is counted, for all headings, real headings, and fake headings. After some data rangling, splitting dictionary key and value pairs, the data is visualized into four visualizations, created with matplotlib.
+- The code loads the data in from a user specified path. Gets the model from huggingface by using pipeline, and specifying which model to get. The data is filtered and cleaned to generate a list of all headings, all real headings, and all fake headings. Thereafter, three loops are used to take each heading in the list, and use the emotion classifer to get the label (emotion) with the highest score, and store it in an empty list. Than using python code, each emotion occorance is counted, for all headings, real headings, and fake headings. After some data rangling, splitting dictionary key and value pairs, the data is visualized into four visualizations, created with matplotlib, and saved to folder *figs*. The dictionaries are also stored visualised as three tabels which can be found in the folder *out*.
 
 ## Discussion
 
@@ -47,8 +47,6 @@ You should write code and documentation which addresses the following tasks:
 ### Findings 
 - By using the plots I can clearly state the the majority of emotions are classified as netural. This could lead to the assumption that the headlines are mostly factual, and the author not using emotion to try to sway the reader in a certain direction. Another clearly statement, which can be made, is that mostly negative emotions are used in news headlines, such as fear and anger. This portays nicely to the "real world", where most news articles are of murders or problems in society. 
 
-### Future analysis 
-- It could be interesting to use POS, to see which kinds of words are used in the headline that give an emotion. By doing so, you could also see which emotion charged word is used the most.
 
 ## Usage
 
