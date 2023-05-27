@@ -70,9 +70,9 @@ def emotion_loop(classifier, texts):
     print("Finding emotions and counting...")
     emotion_list = [] # Creating an empty list to store each emotion label.
     emotion_count = {}
-    for line in texts: # For loop that goes through each headline in the list headlines, and uses the classifier.
+    for line in texts: # For loop that goes through each headline in the pandas series, and uses the classifier.
         emotion_list.append(classifier(line)[0]["label"])  # append list #output[0]["label"]
-        # using classifier to get emotion of each headline. The emotions are stored as Counter object dictionaries in a list. [0] gets the first dictionary in the list ["label"].
+        # using classifier to get the emotion of each headline. The emotions are stored as Counter object dictionaries in a list. [0] gets the first dictionary in the list ["label"].
         # by only selecting label, I append it to the empty list emotion_list.
     
     for emotion in emotion_list: # For every emotion in the list 
