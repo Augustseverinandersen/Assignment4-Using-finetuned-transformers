@@ -12,10 +12,7 @@ sudo apt-get install python3-dev
 
 # requirements
 pip install --upgrade pip
-pip install --upgrade nbformat
 python3 -m pip install -r requirements.txt
-
-#python3 src/emotions.py --filepath ./data/fake_or_real_news.csv
 
 # Deactivate the virtual environment.
 deactivate

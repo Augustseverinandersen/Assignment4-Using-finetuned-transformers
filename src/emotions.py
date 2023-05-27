@@ -65,34 +65,22 @@ def data_cleaning(data, data_filtered_real, data_filtered_fake):
     return all_texts, real_texts, fake_texts
 
 
-def emotion_loops(classifier, all_texts, real_texts, fake_texts):
-    print("Getting emotion label for: ")
+
+def emotion_loop(classifier, texts):
+    print("Finding emotions and counting...")
     emotion_list = [] # Creating an empty list to store each emotion label.
-    real_list = [] # Empty list for real
-    fake_list = [] # Empty list for fake
-    print("    All...")
-    for line in all_texts: # For loop that goes through each headline in the list headlines, and uses the classifier.
+    emotion_count = {}
+    for line in texts: # For loop that goes through each headline in the list headlines, and uses the classifier.
         emotion_list.append(classifier(line)[0]["label"])  # append list #output[0]["label"]
         # using classifier to get emotion of each headline. The emotions are stored as Counter object dictionaries in a list. [0] gets the first dictionary in the list ["label"].
         # by only selecting label, I append it to the empty list emotion_list.
-    print("    Real...")   
-    for line in real_texts: # The same logic in the code below
-        real_list.append(classifier(line)[0]["label"])
-    print("    Fake...")
-    for line in fake_texts: 
-        fake_list.append(classifier(line)[0]["label"])
     
-    return emotion_list, real_list, fake_list
-
-
-def count_emotions(emotion_list): # Creating dictionary of emotion and count
-    emotion_count = {} # Empty dictionary
     for emotion in emotion_list: # For every emotion in the list 
         if emotion in emotion_count: # If the emotion appears 
             emotion_count[emotion] += 1 # add one to the value of the correct key in the empty dictionary 
         else: # Else statement adds the emotion to the dictionary is it has not appeared 
             emotion_count[emotion] = 1 # and adds one to the value
-    
+    emotion_count = dict(sorted(emotion_count.items())) # Ordering the keys alphabetically 
     return emotion_count
 
 
@@ -131,14 +119,13 @@ def visualization_bar(emotions, count, title, folder = "figs"): # Creating a bar
 
 def visualization_scatter(all_emotions, all_count, real_emotions, real_count, fake_emotions, fake_count, folder = "figs"):
     print("Visualizing scatterplot")
-    fig, ax = plt.subplots() 
     # Plotting all, real, and fake in one scatter plot
-    ax.scatter(all_emotions, all_count, c='blue', label='All Headings', marker= "o") # Creating all headings points as a blue circle
-    ax.scatter(real_emotions, real_count, c='green', label='Real Headings', marker= "+" ) # Creating real headings as a green plus sign
-    ax.scatter(fake_emotions, fake_count, c='red', label='Fake Headings', marker= "_") # Creating fake headings as a red underscore
+    plt.scatter(all_emotions, all_count, c='blue', label='All Headings', marker= "o") # Creating all headings points as a blue circle
+    plt.scatter(real_emotions, real_count, c='green', label='Real Headings', marker= "+" ) # Creating real headings as a green plus sign
+    plt.scatter(fake_emotions, fake_count, c='red', label='Fake Headings', marker= "_") # Creating fake headings as a red underscore
 
-    ax.set_xlabel('Emotion') # X axis label
-    ax.set_ylabel('Count') # Y axis label
+    plt.xlabel('Emotion') # X axis label
+    plt.ylabel('Count') # Y axis label
     plt.legend() # Creating a legend
     plt.title('Emotion Counts') # Title
 
@@ -152,19 +139,18 @@ def main_function():
     folder_path = unzip(args) # Unzipping zip folder
     data = loading_data(folder_path) # Loading data into pandas dataframe
     classifier = pre_trained_model() # Getting pretrained model
-    data_filtered_real, data_filtered_fake = filtering(data) # Creating two new dataframes with fake or real
+    data_filtered_real, data_filtered_fake = filtering(data) # Creating two new dataframes with FAKE or REAL
     all_texts, real_texts, fake_texts = data_cleaning(data, data_filtered_real, data_filtered_fake) # Selecting column
-    emotion_list, real_list, fake_list = emotion_loops(classifier, all_texts, real_texts, fake_texts) # Getting the emotion for each headline
-    emotion_count = count_emotions(emotion_list) # Creating dictionary of emotion count for all headings
-    real_emotion_count = count_emotions(real_list) # Creating dictionary of emotion for REAL headings
-    fake_emotion_count = count_emotions(fake_list) # Creating dictionary of emotion count for FAKE headings 
+    emotion_count = emotion_loop(classifier, all_texts)# Getting the emotion for each headline in all headlines
+    real_emotion_count = emotion_loop(classifier, real_texts) # Getting the emotion for each headline in REAL headlines
+    fake_emotion_count = emotion_loop(classifier, fake_texts)# Getting the emotion for each headline in FAKE headlines
     all_emotions, all_count, real_emotions, real_count, fake_emotions, fake_count = splitting_dictionary(emotion_count, real_emotion_count, fake_emotion_count) # Splitting the values
-    tabels(emotion_count, "all_headings") # Creating and saving table for all headings
-    tabels(real_emotion_count, "real_headings") # Creating and saving table for real headings
-    tabels(fake_emotion_count, "fake_headings") # Creating and saving table for fake headings
+    tabels(emotion_count, "All_headings") # Creating and saving table for all headings
+    tabels(real_emotion_count, "Feal_headings") # Creating and saving table for REAL headings
+    tabels(fake_emotion_count, "Fake_headings") # Creating and saving table for FAKE headings
     visualization_bar(all_emotions, all_count, "All Headings", folder = "figs") # Creating bar plot for all headings
-    visualization_bar(real_emotions, real_count, "Real Headings", folder = "figs") # Creating bar plot for real headings
-    visualization_bar(fake_emotions, fake_count, "Fake Headings", folder = "figs") # Creating bar plot for fake headings
+    visualization_bar(real_emotions, real_count, "Real Headings", folder = "figs") # Creating bar plot for REAL headings
+    visualization_bar(fake_emotions, fake_count, "Fake Headings", folder = "figs") # Creating bar plot for FAKE headings
     visualization_scatter(all_emotions, all_count, real_emotions, real_count, fake_emotions, fake_count, folder = "figs") # Creating a scatter plot
 
 if __name__ == "__main__": # If script is called from command line fun main function
