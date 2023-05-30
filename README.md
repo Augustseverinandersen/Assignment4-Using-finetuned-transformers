@@ -1,6 +1,3 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/BhnScEmU)
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-718a45dd9cf7e7f842a935f5ebbe5719a5e09af4491e668f4dbf3b35d5cca122.svg)](https://classroom.github.com/online_ide?assignment_repo_id=10838452&assignment_repo_type=AssignmentRepo)
-
 # 4. Assignment 4 - Using finetuned transformers via HuggingFace
 ## 4.1 Assignment description
 Written by Ross: 
@@ -14,7 +11,7 @@ For this assignment, you should use _HuggingFace_ to extract information from th
     - Distribution of emotions across only the fake news
 -	Comparing the results, discuss if there are any key differences between the two sets of headlines.
 ## 4.2 Machine Specification and My Usage
-All the computation done for this project was performed on the UCloud interactive HPC system, which is managed by the eScience Center at the University of Southern Denmark. The scripts were created with Coder Python 1.73.1 and Python version 3.9.2.
+All the computation done for this project was performed on the UCloud interactive HPC system, which is managed by the eScience Center at the University of Southern Denmark. The scripts were created with Coder Python 1.73.1 and Python version 3.9.2. This script was run on 16 CPUs, and a total run time of 25 minutes.
 ### 4.2.1 Perquisites
 To run the scripts, make sure to have Bash and Python3 installed on your device. The script has only been tested on Ucloud.
 ## 4.3 Contribution

@@ -4,14 +4,14 @@ from transformers import pipeline
 # Data munging tools 
 import pandas as pd 
 import matplotlib.pyplot as plt
-import zipfile
+
 
 # System tools
 import sys
 sys.path.append(".")
 import argparse
 import os 
-
+import zipfile
 
 def input_parse():
     # initialize the parser
